@@ -138,11 +138,43 @@ WHERE
     NOT department_id = 4;
    
    
+   
 SELECT 
     *
 FROM
     `employees`
 ORDER BY `salary` DESC , `first_name` ASC , `last_name` DESC , `middle_name` ASC; 
+
+
+
+CREATE VIEW v_employees_salaries AS
+    SELECT 
+        `first_name`, `last_name`, `salary`
+    FROM
+        `employees`; 
+
+
+
+CREATE VIEW v_employees_job_titles AS
+    SELECT 
+        CONCAT_WS(' ',
+                `first_name`,
+                `middle_name`,
+                `last_name`) AS `full_name`,
+        `job_title`,
+        CASE `middle_name`
+            WHEN NULL THEN '' 
+        END
+    FROM
+        `employees`;
+
+
+
+SELECT DISTINCT
+    `job_title`
+FROM
+    `employees`
+ORDER BY `job_title` ASC;
 
 
 
