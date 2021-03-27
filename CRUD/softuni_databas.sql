@@ -154,8 +154,7 @@ CREATE VIEW v_employees_salaries AS
         `employees`; 
 
 
-# dont work in judge?!?
-
+# Workbench- Yes,  judge - No?!?
 CREATE VIEW v_employees_job_titles AS
     SELECT 
         CONCAT_WS(' ',
