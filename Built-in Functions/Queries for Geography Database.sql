@@ -13,8 +13,7 @@ ORDER BY `iso_code`;
 SELECT 
     p.`peak_name`,
     r.`river_name`,
-    LOWER(CONCAT(p.`peak_name`,
-                    SUBSTRING(r.`river_name`, 2))) AS mix
+    LOWER(CONCAT(p.`peak_name`, SUBSTRING(r.`river_name`, 2))) AS mix
 FROM
     `peaks` AS p,
     `rivers` AS r
