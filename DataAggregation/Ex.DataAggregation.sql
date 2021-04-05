@@ -8,11 +8,11 @@ FROM
 SELECT 
     MAX(magic_wand_size) AS `longest_magic_wand`
 FROM
-    `wizzard_deposits`; 
+    `wizzard_deposits`;
  
  
  
- SELECT 
+SELECT 
     `deposit_group`,
     MAX(`magic_wand_size`) AS `longest_magic_wand`
 FROM
@@ -37,7 +37,7 @@ SELECT
 FROM
     `wizzard_deposits`
 GROUP BY `deposit_group`
-ORDER BY `total_sum`, `deposit_group`;  
+ORDER BY `total_sum` , `deposit_group`;
   
   
   
@@ -60,7 +60,7 @@ WHERE
     `magic_wand_creator` = 'Ollivander Family'
 GROUP BY `deposit_group`
 HAVING `total_sum` < 150000
-order BY `total_sum` DESC;
+ORDER BY `total_sum` DESC;
   
   
   
@@ -88,7 +88,7 @@ SELECT
     COUNT(*) AS `wizzard_count`
 FROM
     `wizzard_deposits`
-    GROUP BY `age_group`
+GROUP BY `age_group`
 ORDER BY `age_group`;   
     
     
