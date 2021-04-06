@@ -112,7 +112,7 @@ FROM
 WHERE
     `deposit_start_date` > '1985-01-01'
 GROUP BY `deposit_group`, `is_deposit_expired`
-ORDER BY `deposit_group` DESC , `deposit_expiration_date`;
+ORDER BY `deposit_group` DESC , `is_deposit_expired`;
 
 
 
@@ -122,9 +122,11 @@ FROM
     (SELECT 
         `deposit_amount` - (SELECT 
                     `deposit_amount`
-                FROM 
+                FROM
                     `wizzard_deposits`
                 WHERE
                     `id` = wd.id + 1) AS `next`
     FROM
         `wizzard_deposits` AS `wd`) AS `diff`; 
+
+
