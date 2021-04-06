@@ -11,6 +11,8 @@ ORDER BY `department_id`;
 
 
 
+
+
 CREATE TABLE `temp` SELECT * FROM
     `employees`
 WHERE
@@ -26,7 +28,6 @@ SET
 WHERE
     `department_id` = 1;
     
-
 SELECT 
     `department_id`, avg(`salary`) as `avg_salary`
 FROM
@@ -34,7 +35,10 @@ FROM
     GROUP BY `department_id`
     ORDER BY `department_id`;
     
-    
+   
+   
+   
+   
 
 SELECT 
     `department_id`, MAX(`salary`) AS `max_salary`
@@ -44,7 +48,9 @@ GROUP BY `department_id`
 HAVING `max_salary` NOT BETWEEN 30000 and 70000
 ORDER BY `department_id`;
   
-   
+ 
+ 
+ 
 
 SELECT 
     COUNT(*)
@@ -52,6 +58,8 @@ FROM
     `employees`
 WHERE
     `manager_id` IS NULL;
+
+
 
 
 
@@ -73,6 +81,9 @@ ORDER BY e.`department_id`;
 
 
 
+
+
+
 SELECT 
     e.`first_name`, e.`last_name`, e.`department_id`
 FROM
@@ -87,6 +98,8 @@ WHERE
         GROUP BY `department_id`)
 ORDER BY e.`department_id` , e.`employee_id`
 LIMIT 10;
+
+
 
 
 
