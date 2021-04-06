@@ -55,10 +55,21 @@ WHERE
 
 
 
-
-
-
-
+SELECT 
+    e.`department_id`,
+    (SELECT DISTINCT
+            `salary`
+        FROM
+            `employees`
+        WHERE
+            `department_id` = e.`department_id`
+        ORDER BY `salary` DESC
+        LIMIT 2, 1) AS `third_highest_salary`
+FROM
+    `employees` e
+GROUP BY e.`department_id` 
+HAVING `third_highest_salary` IS NOT NULL
+ORDER BY e.`department_id`;
 
 
 
@@ -79,5 +90,10 @@ LIMIT 10;
 
 
 
-
+SELECT 
+    `department_id`, SUM(`salary`) as `totaly_salary`
+FROM
+    `employees`
+GROUP BY `department_id`
+order by `department_id`;
 
