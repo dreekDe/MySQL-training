@@ -92,6 +92,39 @@ GROUP BY `age_group`
 ORDER BY `age_group`;   
     
     
+SELECT 
+    LEFT(`first_name`, 1) AS `first_latter`
+FROM
+    `wizzard_deposits`
+WHERE
+    `deposit_group` = 'Troll Chest'
+GROUP BY `first_latter`
+ORDER BY `first_latter`;
 
 
-    
+
+SELECT 
+    `deposit_group`,
+    `is_deposit_expired`,
+    AVG(`deposit_interest`) AS `average_interest`
+FROM
+    `wizzard_deposits`
+WHERE
+    `deposit_start_date` > '1985-01-01'
+GROUP BY `deposit_group`, `is_deposit_expired`
+ORDER BY `deposit_group` DESC , `deposit_expiration_date`;
+
+
+
+SELECT 
+    SUM(diff.next) AS `sum_difference`
+FROM
+    (SELECT 
+        `deposit_amount` - (SELECT 
+                    `deposit_amount`
+                FROM 
+                    `wizzard_deposits`
+                WHERE
+                    `id` = wd.id + 1) AS `next`
+    FROM
+        `wizzard_deposits` AS `wd`) AS `diff`; 
