@@ -28,7 +28,7 @@ VALUE
 
 INSERT INTO `people` 
 VALUE 
-(1,  'Roberto', 43300.00, 102),
+(1, 'Roberto', 43300.00, 102),
 (2,	'Tom', 56100.00, 103),
 (3, 'Yana', 60200.00, 101);
 
