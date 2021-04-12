@@ -27,7 +27,7 @@ REFERENCES `customers` (`customer_id`)
 
 CREATE TABLE `item_types`(
 `item_type_id` INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-`name` VARBINARY(50)
+`name` VARCHAR(50)
 );
 
 CREATE TABLE `items`(
