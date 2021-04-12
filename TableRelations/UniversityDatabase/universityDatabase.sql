@@ -1,6 +1,3 @@
-CREATE SCHEMA `university_database`;
-USE `university_database`;
-
 CREATE TABLE `majors` (
     `major_id` INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     `name` VARCHAR(50)
