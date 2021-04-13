@@ -12,8 +12,26 @@ ORDER BY e.`employee_id`
 LIMIT 5; 
 
 
+#2
+SELECT 
+    t.`town_id`, t.`name` AS `town_name`, a.`address_text`
+FROM
+    `addresses` AS a
+        JOIN
+    `towns` AS t ON a.`town_id` = t.`town_id`
+WHERE
+    t.`name` IN ('San Francisco' , 'Sofia', 'Carnation')
+ORDER BY `town_id` , `address_id`;
 
-#5
+
+
+#3
+
+
+
+
+
+#4
 SELECT 
     COUNT(*) AS `count`
 FROM
@@ -24,8 +42,4 @@ WHERE
         FROM
             `employees`
         LIMIT 1);
-
-
-
-
 
