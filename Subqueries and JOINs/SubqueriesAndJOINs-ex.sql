@@ -11,6 +11,8 @@ FROM
 ORDER BY `address_id`
 LIMIT 5;
 
+
+
 #2
 SELECT 
     e.`first_name`,
@@ -27,6 +29,7 @@ ORDER BY e.`first_name` , e.`last_name`
 LIMIT 5;
 
 
+
 #3
 SELECT 
     e.`employee_id`,
@@ -38,8 +41,9 @@ FROM
         JOIN
     `departments` AS d ON e.department_id = d.department_id
 WHERE
-    d.`department_id` = 3
+   d.`name` = 'Sales'
 ORDER BY e.`employee_id` DESC;
+
 
 
 #4
@@ -56,4 +60,77 @@ WHERE
     e.`salary` > 15000
 ORDER BY d.`department_id` DESC
 LIMIT 5;
+
+
+
+#5
+SELECT 
+    e.`employee_id`, e.`first_name`
+FROM
+    `employees` AS e
+        LEFT JOIN
+    `employees_projects` AS ep ON e.`employee_id` = ep.`employee_id`
+WHERE
+    ep.`project_id` IS NULL
+ORDER BY e.`employee_id` DESC
+LIMIT 3;
+
+
+
+#6 
+SELECT 
+    e.`first_name`,
+    e.`last_name`,
+    e.`hire_date`,
+    d.`name` AS `dept_name`
+FROM
+    `employees` AS e
+        JOIN
+    `departments` AS d ON e.`department_id` = d.`department_id`
+WHERE
+    e.`hire_date` > 1999-1-1
+        AND d.`name` IN ('Sales' , 'Finance')
+ORDER BY e.`hire_date`;
+
+
+
+#7
+SELECT 
+    e.`employee_id`,
+    e.`first_name`,
+    ep.`project_id`,
+    p.`name` AS `project_name`
+FROM
+    `employees` AS e
+        JOIN
+    `employees_projects` AS ep ON e.employee_id = ep.employee_id
+        JOIN
+    `projects` AS p ON p.project_id = ep.project_id
+WHERE
+    p.`start_date` > '2002-08-13'
+        AND p.`end_date` IS NULL
+ORDER BY e.`first_name` , p.`name`
+LIMIT 5;
+
+
+
+#8
+SELECT 
+    e.`employee_id`,
+    e.`first_name`,
+    (CASE
+        WHEN (YEAR(p.start_date) < 2005) THEN p.`name`
+        ELSE 'NULL'
+    END) AS `project_name`
+FROM
+    `employees` AS e
+        JOIN
+    `employees_projects` AS ep ON e.employee_id = ep.employee_id
+        JOIN
+    `projects` AS p ON p.project_id = ep.project_id
+WHERE
+    e.`employee_id` = 24
+ORDER BY p.`name`;
+
+
 
