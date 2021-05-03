@@ -32,7 +32,7 @@ WHERE
     d.`name` = `department_name`;
 END 
                                                                                            
-#2nd var                                                                                           
+#2nd var    
                                                                                            
 CREATE DEFINER=`root`@`localhost` PROCEDURE `usp_raise_salaries`(`department_name` VARCHAR(45))
 BEGIN
@@ -45,10 +45,10 @@ WHERE
     d.`name` = `department_name`;
     
 SELECT `first_name`, `salary`
-FROM `employees`
+FROM `employees` as e
+        JOIN
+    `departments` AS d ON d.department_id = e.department_id 
 WHERE  d.`name` =  `department_name`
 ORDER BY `first_name`, `salary`;
-END                                                                                           
-                                                                                           
-                                                                                    
+END                                                                            
     
