@@ -35,5 +35,26 @@ END
 CALL usp_raise_salaries('Finance');
                                                                                            
                                                                                            
+ #3
+
+ CREATE DEFINER=`root`@`localhost` PROCEDURE `usp_raise_salary_by_id`(id INT)
+BEGIN
+DECLARE does_exist INT;
+START TRANSACTION;
+
+UPDATE `employees` 
+SET `salary` = `salary` * 1.05
+WHERE `employee_id` = `id`;
+
+SET does_exist := (SELECT COUNT(*) FROM employees WHERE employee_id = id);
+
+IF does_exist > 0 THEN 
+      COMMIT;
+ELSE
+      ROLLBACK;
+END IF;
+END
+                                                                                           
+                                                                                           
                                                                                            
     
