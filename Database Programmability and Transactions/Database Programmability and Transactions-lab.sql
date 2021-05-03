@@ -1,0 +1,2 @@
+SELECT UFN_COUNT_EMPLOYEES_BY_TOWN('Sofia') AS `count`;
+    
