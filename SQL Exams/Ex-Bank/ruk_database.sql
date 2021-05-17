@@ -93,6 +93,73 @@ WHERE
 
 
 
+SELECT 
+    id, full_name
+FROM
+    clients;
+
+SELECT 
+    id,
+    CONCAT_WS(' ', first_name, last_name),
+    CONCAT('$', salary),
+    started_on
+FROM
+    employees
+WHERE
+    salary >= 100000
+        AND started_on >= '2018-01-01'
+ORDER BY salary DESC , id DESC
+;
+
+
+
+
+SELECT 
+    c.id,
+    CONCAT_WS(' : ', c.card_number, cl.full_name) AS card_token
+FROM
+    cards AS c
+        JOIN
+    bank_accounts AS ba ON ba.id = c.bank_account_id
+        JOIN
+    clients AS cl ON cl.id = ba.client_id
+ORDER BY c.id DESC;
+    
+
+
+SELECT 
+    CONCAT_WS(' ', e.first_name, e.last_name) AS name,
+    e.started_on,
+    COUNT(ec.client_id) AS count_of_clients
+FROM
+    employees_clients AS ec
+        JOIN
+    employees AS e ON e.id = ec.employee_id
+GROUP BY ec.employee_id
+ORDER BY count_of_clients DESC , ec.employee_id ASC
+LIMIT 5;
+
+
+
+
+SELECT 
+    br.name, COUNT(cr.card_number) AS count_of_cards
+FROM
+    branches AS br
+        LEFT JOIN
+    employees AS e ON e.branch_id = br.id
+        LEFT JOIN
+    employees_clients AS ec ON ec.employee_id = e.id
+        LEFT JOIN
+    clients AS cl ON cl.id = ec.client_id
+        LEFT JOIN
+    bank_accounts AS ba ON ba.client_id = cl.id
+        LEFT JOIN
+    cards AS cr ON cr.bank_account_id = ba.id
+GROUP BY br.name
+ORDER BY count_of_cards DESC , br.name ASC
+;
+
 
 
 
