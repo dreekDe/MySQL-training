@@ -52,3 +52,51 @@ CREATE TABLE `employees_clients` (
     CONSTRAINT fk_ec_c FOREIGN KEY (`client_id`)
         REFERENCES `clients` (`id`)
 );
+
+
+INSERT INTO `cards`(`card_number`, `card_status`, `bank_account_id`)
+(
+SELECT 
+     REVERSE(`full_name`), 'Active', id
+FROM
+    `clients`
+WHERE
+    id BETWEEN 191 AND 200
+);
+
+
+
+UPDATE employees_clients AS ec 
+SET 
+    ec.employee_id = (SELECT 
+            e.employee_id
+        FROM
+            (SELECT 
+                *
+            FROM
+                employees_clients) AS e
+        GROUP BY e.employee_id
+        ORDER BY COUNT(e.client_id) , e.employee_id
+        LIMIT 1)
+WHERE
+    ec.employee_id = ec.client_id;
+
+
+
+
+DELETE e . * FROM employees AS e
+        LEFT JOIN
+    employees_clients AS ec ON ec.employee_id = e.id 
+WHERE
+    ec.client_id IS NULL;
+
+
+
+
+
+
+
+
+
+
+
