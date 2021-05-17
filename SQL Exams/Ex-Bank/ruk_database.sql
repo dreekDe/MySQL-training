@@ -183,5 +183,13 @@ END
 
 
 
-
+CREATE DEFINER=`root`@`localhost` PROCEDURE `udp_clientinfo`(name VARCHAR (30))
+BEGIN
+SELECT 
+    cl.full_name, cl.age, ba.account_number, CONCAT('$', ba.balance) as balance
+FROM
+    clients AS cl
+    JOIN bank_accounts as ba on ba.client_id = cl.id
+    WHERE cl.full_name = name;
+END
 
