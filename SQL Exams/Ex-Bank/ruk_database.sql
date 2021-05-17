@@ -66,6 +66,26 @@ WHERE
 
 
 
+
+CREATE DEFINER=`root`@`localhost` FUNCTION `udf_client_cards_count`(name VARCHAR(30)) RETURNS int
+    DETERMINISTIC
+BEGIN
+
+RETURN (SELECT 
+    COUNT(cr.card_number) AS cards
+FROM
+    clients AS cl
+        LEFT JOIN
+    bank_accounts AS ba ON ba.client_id = cl.id
+        LEFT JOIN
+    cards AS cr ON cr.bank_account_id = ba.id
+    WHERE cl.full_name = name);
+
+END
+                                                                                 
+                                                                                 
+                                                                                 
+
 UPDATE employees_clients AS ec 
 SET 
     ec.employee_id = (SELECT 
